@@ -25,10 +25,10 @@ int ali_check_type(array_list_int ali){
 /* Increase capacity size of the array_list_int internal storage */
 int ali_realloc(array_list_int ali){
   /* TODO: */
-	
+
 	if(!ali_check_type(ali)){
-		
-		return 0;		
+
+		return 0;
 				}
 	else{
 		ali->a =(int*)realloc(ali->a,++(ali->capacity));
@@ -100,14 +100,32 @@ unsigned int ali_size(array_list_int ali){
  * TODO:
 */
 int ali_find(array_list_int ali, int element){
-  return -1;
+  int i, elementindex = -1;
+  if(!ali_check_type(ali)){
+    return 0;
+  }
+    for(i=0;i < 8; i++){
+      if((ali -> a[i]) == element){
+        elementindex =  i;
+
+      }
+
+  }
+  return elementindex;
 }
 
 /**
  * TODO:
  */
 int ali_insert_at(array_list_int ali, int index, int value){
-  return 0;
+  if(!ali_check_type(ali)){
+    return 0;
+  }
+  if(index < 0 || index > (ali->size)){
+    return 0;
+  }
+  ali -> a[index] = value;
+  return 1;
 }
 
 /**
