@@ -136,7 +136,7 @@ int ali_remove_from(array_list_int ali, int index){
 }
 
 /**
- * TODO: */
+ * Returns the total capacity of the ArrayList */
 unsigned int ali_capacity(array_list_int ali){
   if(!ali_check_type(ali)){
       return 0;
