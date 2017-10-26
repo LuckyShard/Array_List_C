@@ -132,7 +132,26 @@ int ali_insert_at(array_list_int ali, int index, int value){
  * TODO:
  */
 int ali_remove_from(array_list_int ali, int index){
-  return ali->size;
+  int i;
+  if(!ali_check_type(ali))
+      return 0;
+  if(index == (ali -> size)){
+    --(ali -> size);
+    return ali-> size;
+  }
+      
+  if(index < 0 || index > (ali -> size)){
+    return 0;
+  }
+    for(i = index; i< (ali -> size);i++){
+      if((i+1) < (ali -> size)){
+        ali -> a[i] = ali -> a[i+1];
+      }
+    }
+    --(ali->size);
+    return ali->size;
+  
+  
 }
 
 /**
