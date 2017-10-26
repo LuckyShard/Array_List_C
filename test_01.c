@@ -4,7 +4,7 @@
 
 int main(){
   array_list_int a1 = ali_create();
-  int i,t,elementi =0,elementAt,newval , j;
+  int i,t,elementi =0,elementAt,newval , j,cap;
   double p;
   for (i=0; i < 8 ; ++i)
     ali_push_back(a1,i*3+1);
@@ -30,8 +30,8 @@ int main(){
   printf("o elemento no index %d é : %d \n",elementi,elementAt);
   p = ali_percent_occuped(a1);
   printf("Porcentagem ocupada em a1 : %f \n",p);
-
-
+  cap = ali_capacity(a1);
+  printf("Capacidade total do Arraylist: %d\n",cap);
   printf("--------> pop_back <--------\n");
   for (i=0; i < 8 ; ++i)
     ali_pop_back(a1);

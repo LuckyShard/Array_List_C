@@ -62,7 +62,7 @@ int ali_get(array_list_int ali, int index){
   return ali->a[index];
 }
 
-/* Adds elemento 'i' to the end of the dynamic array */
+/* Adds element 'i' to the end of the dynamic array */
 unsigned int ali_push_back(array_list_int ali, int i){
   if (!ali_check_type(ali))
     return 0;
@@ -94,10 +94,10 @@ unsigned int ali_size(array_list_int ali){
   return ali->size;
   return 0;
 }
-
+ 
 
 /*
- * TODO:
+ * find the especified element and return the index of it.
 */
 int ali_find(array_list_int ali, int element){
   int i, elementindex = -1;
@@ -115,7 +115,7 @@ int ali_find(array_list_int ali, int element){
 }
 
 /**
- * TODO:
+ * Insert one new element in the especified index
  */
 int ali_insert_at(array_list_int ali, int index, int value){
   if(!ali_check_type(ali)){
@@ -138,7 +138,11 @@ int ali_remove_from(array_list_int ali, int index){
 /**
  * TODO: */
 unsigned int ali_capacity(array_list_int ali){
-  return 0;
+  if(!ali_check_type(ali)){
+      return 0;
+    
+  }
+  return ali -> capacity;
 }
 
 
