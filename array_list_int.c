@@ -135,16 +135,16 @@ int ali_remove_from(array_list_int ali, int index){
   int i;
   if(!ali_check_type(ali))
       return 0;
-  if(index == (ali -> size)){
+  if(index == (ali -> size - 1 )){
     --(ali -> size);
     return ali-> size;
   }
       
-  if(index < 0 || index > (ali -> size)){
+  if(index < 0 || index > (ali -> size  - 1 )){
     return 0;
   }
-    for(i = index; i< (ali -> size);i++){
-      if((i+1) < (ali -> size)){
+    for(i = index; i < (ali -> size);i++){
+      if((i+1) < (ali -> size  -1 )){
         ali -> a[i] = ali -> a[i+1];
       }
     }

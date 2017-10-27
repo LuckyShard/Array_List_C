@@ -14,20 +14,19 @@ int main(){
   for (i=0; i < t ; ++i)
     printf("%d ", ali_get(a1,i));
   printf("}\n");
-  printf("Digite o indice do elemento que deseja achar:\n");
+  printf("Digite um item para busca:\n");
   scanf("%d", &elementi);
   elementAt = ali_find(a1,elementi);
   printf("Digite o novo valor para ser inserido: \n");
   scanf("%d", &newval);
   printf("Digite o indice no qual deseja incluir o valor: \n");
   scanf("%d", &j);
-  printf("\n");
   ali_insert_at(a1,j,newval);
   printf("a1 = { ");
   for (i=0; i < t ; ++i)
     printf("%d ", ali_get(a1,i));
   printf("}\n");
-  printf("o elemento no index %d é : %d \n",elementi,elementAt);
+  printf("o elemento %d se encontra no indice : %d \n",elementi,elementAt);
   p = ali_percent_occuped(a1);
   printf("Porcentagem ocupada em a1 : %f \n",p);
   cap = ali_capacity(a1);
