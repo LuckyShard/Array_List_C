@@ -27,13 +27,11 @@ int ali_realloc(array_list_int ali){
   /* TODO: */
 
 	if(!ali_check_type(ali)){
-
 		return 0;
 				}
-	else{
 		ali->a =(int*)realloc(ali->a,++(ali->capacity));
 		return 1;
-		}
+		
  	 /* Realloc could not allocate new memory */
 }
 
@@ -133,23 +131,13 @@ int ali_insert_at(array_list_int ali, int index, int value){
  */
 int ali_remove_from(array_list_int ali, int index){
   int i;
-  if(!ali_check_type(ali))
+  if(!ali_check_type(ali) || index < 0 || index > (ali -> size))
       return 0;
-  if(index == (ali -> size - 1 )){
-    --(ali -> size);
-    return ali-> size;
-  }
+    for(i = index+1; i < (ali -> size);i++){
+        ali -> a[i-1] = ali -> a[i];
       
-  if(index < 0 || index > (ali -> size  - 1 )){
-    return 0;
-  }
-    for(i = index; i < (ali -> size);i++){
-      if((i+1) < (ali -> size  -1 )){
-        ali -> a[i] = ali -> a[i+1];
-      }
     }
-    --(ali->size);
-    return ali->size;
+    return --(ali->size);
   
   
 }
