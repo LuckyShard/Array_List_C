@@ -1,7 +1,5 @@
 #include "array_list_int.h"
-
 #include <stdlib.h> /* For malloc and free */
-
 #define MAGIC 314159265
 
 struct array_list_int{
@@ -28,8 +26,18 @@ int ali_realloc(array_list_int ali){
 
 	if(!ali_check_type(ali)){
 		return 0;
-				}
-		ali->a =(int*)realloc(ali->a,++(ali->capacity));
+        }
+
+    ali -> capacity++;
+    int *sz = (int*)malloc(sizeof(int)*ali->capacity);
+    int i;
+    for(i=0;i<ali->size;++i){
+      sz[i] = ali->a[i];
+    }
+    free(ali->a);
+    ali->a = sz;
+    return sz? 1:0;
+		
 		return 1;
 		
  	 /* Realloc could not allocate new memory */
@@ -134,6 +142,7 @@ int ali_remove_from(array_list_int ali, int index){
   if(!ali_check_type(ali) || index < 0 || index > (ali -> size))
       return 0;
     for(i = index+1; i < (ali -> size);i++){
+        if(i < (ali -> size))
         ali -> a[i-1] = ali -> a[i];
       
     }
