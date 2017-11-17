@@ -51,5 +51,6 @@ int main(){
     printf("%d ", ali_get(a1,i));
   printf("}\n");
   ali_destroy(a1);
+  printf("<3");
   return 0;
 }
