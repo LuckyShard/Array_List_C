@@ -22,13 +22,7 @@ int ali_check_type(array_list_int ali){
 
 /* Increase capacity size of the array_list_int internal storage */
 int ali_realloc(array_list_int ali){
-  /* TODO: */
-
-	if(!ali_check_type(ali)){
-		return 0;
-        }
-
-    ali -> capacity++;
+    ali->capacity = ali->size ? ali->size<<1 : 1;	
     int *sz = (int*)malloc(sizeof(int)*ali->capacity);
     int i;
     for(i=0;i<ali->size;++i){
@@ -88,7 +82,9 @@ unsigned int ali_pop_back(array_list_int ali){
     return 0;
 if (ali->size == 0)
     return 0;
-  return --(ali->size);
+  --(ali->size);
+  if (ali_percent_occuped(ali) <= 0.25) ali_realloc(ali);	
+  return ali-> size;
 }
 
 
@@ -96,9 +92,7 @@ if (ali->size == 0)
 unsigned int ali_size(array_list_int ali){
   if (!ali_check_type(ali))
     return 0;
-  else
   return ali->size;
-  return 0;
 }
  
 
@@ -124,29 +118,40 @@ int ali_find(array_list_int ali, int element){
  * Insert one new element in the especified index
  */
 int ali_insert_at(array_list_int ali, int index, int value){
-  if(!ali_check_type(ali)){
-    return 0;
-  }
-  if(index < 0 || index > (ali->size)){
-    return 0;
-  }
-  ali -> a[index] = value;
-  return 1;
+   if (!ali_check_type(ali) || index < 0 || index >= ali->size)		
+    return -1;																										
+  if (ali->size == ali->capacity)																	
+    if (!ali_realloc(ali))																				
+      return -1;																									
+
+  int i = ali->capacity+1;																				
+
+  while (i-->index)																								
+    ali->a[i] = ali->a[i-1];																			
+
+  ali->size++;																										
+  ali->a[index] = value;																					
+
+  return ali->size;
+
 }
 
 /**
  * TODO:
  */
 int ali_remove_from(array_list_int ali, int index){
+ if (!ali_check_type(ali) || index < 0 || index >= ali->size)		
+    return -1;																										
   int i;
-  if(!ali_check_type(ali) || index < 0 || index > (ali -> size))
-      return 0;
-    for(i = index+1; i < (ali -> size);i++){
-        if(i < (ali -> size))
-        ali -> a[i-1] = ali -> a[i];
-      
-    }
-    return --(ali->size);
+  for (i = index+1; i < ali->size; i++)														
+    ali->a[i-1] = ali->a[i];																			
+
+  --ali->size;																									
+
+  if (ali_percent_occuped(ali) <= 0.25) ali_realloc(ali);					
+
+	return ali->size;
+
   
   
 }
@@ -154,10 +159,8 @@ int ali_remove_from(array_list_int ali, int index){
 /**
  * Returns the total capacity of the ArrayList */
 unsigned int ali_capacity(array_list_int ali){
-  if(!ali_check_type(ali)){
+  if(!ali_check_type(ali))
       return 0;
-    
-  }
   return ali -> capacity;
 }
 
@@ -166,13 +169,9 @@ unsigned int ali_capacity(array_list_int ali){
  * returns percentage ocuppied by size in all capacity of ali*/
 double ali_percent_occuped(array_list_int ali){
   double percent = 0.0;
-  if(!ali_check_type(ali)){
+  if(!ali_check_type(ali))
     return 0.0;
-  }
-  else{
-    if(ali -> size != 0)
-  percent = ((ali->capacity) / (ali -> size)) * 100 ;
-  return percent;
+  return ((double)ali->size/(double)ali->capacity);
   }
 }
 
